@@ -1,0 +1,61 @@
+/* chat.css */
+
+/* Estilos generales del chat */
+#chat-container {
+    width: 30%; /* Ancho del chat */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #3d3d3d; /* Color de fondo del chat */
+    color: #ffffff; /* Color del texto */
+    border-radius: 15px; /* Borde redondeado */
+    border: 3px solid #61dafb; /* Borde del chat */
+}
+
+/* Estilos del título "Chat en vivo conectawild" */
+#chat-title {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #61dafb; /* Color del título */
+}
+
+/* Estilos de la lista de mensajes */
+#messages {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Estilos de los mensajes */
+.message-item {
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 10px; /* Borde redondeado de los mensajes */
+    word-wrap: break-word;
+}
+
+/* Estilos del campo de entrada de mensajes */
+#message_input {
+    width: calc(100% - 70px);
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid #61dafb; /* Borde del campo de entrada */
+}
+
+/* Estilos del botón de enviar */
+#send_button {
+    width: 60px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #61dafb; /* Color de fondo del botón */
+    color: #ffffff; /* Color del texto del botón */
+    border: none;
+    cursor: pointer;
+}
+
+/* Estilos del botón de enviar al pasar el ratón */
+#send_button:hover {
+    background-color: #4b9cdb; /* Color de fondo del botón al pasar el ratón */
+}

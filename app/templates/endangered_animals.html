@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endangered Animals</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animales.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Conectawild</a></li>
+            <li style="float: right;"><a href="#">Inicio</a></li>
+            <li style="float: right;"><a href="#">Animales en Peligro</a></li>
+            <li style="float: right;"><a href="#">Acerca de</a></li>
+            <li style="float: right;"><a href="#">Contacto</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Catalogo de animales en peligro de extincion</h1>
+        <ul>
+            {% for animal in animals %}
+            <li>
+                <strong>Category:</strong> {{ animal.category }}<br>
+                <strong>Name:</strong> {{ animal.name }}<br>
+                <strong>Description:</strong> {{ animal.description }}<br>
+                <strong>Counter:</strong> {{ animal.counter }}<br>
+                {% if animal.image %}
+                    <img src="data:image/jpeg;base64,{{ animal.image }}" alt="Animal Image" class="animal-image">
+                {% endif %}
+            </li>Z
+            {% endfor %}
+        </ul>
+    </div>
+    <script src="{{ url_for('static', filename='js/animales.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.2.0/socket.io.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-title">Chat en vivo conectawild</div>
+        <ul id="messages"></ul>
+        <input id="message_input" autocomplete="off" onkeypress="handleKeyPress(event)" />
+        <button id="send_button" onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+// chat.js
+
+var socket = io();
+var username = ''; // Variable para almacenar el nombre de usuario
+
+// Función para establecer el nombre de usuario
+function setUsername() {
+    username = prompt('Por favor, introduce tu nombre de usuario:');
+    if (!username || username.trim() === '') {
+        setUsername(); // Pedir de nuevo si el nombre de usuario está vacío
+    }
+}
+
+// Función para enviar un mensaje al servidor
+function sendMessage() {
+    if (!username) {
+        setUsername(); // Establecer el nombre de usuario si aún no se ha establecido
+        return;
+    }
+    var message = document.getElementById('message_input').value.trim();
+    if (message !== '') {
+        socket.emit('message', { username: username, message: message }); // Emitir el mensaje al servidor junto con el nombre de usuario
+        document.getElementById('message_input').value = '';
+    }
+}
+
+// Manejador de eventos para presionar la tecla Enter
+function handleKeyPress(event) {
+    if (event.keyCode === 13) {
+        sendMessage();
+    }
+}
+
+// Evento de conexión al servidor Socket.IO
+socket.on('connect', function() {
+    console.log('Conectado al servidor');
+    if (!username) {
+        setUsername(); // Establecer el nombre de usuario si aún no se ha establecido
+    }
+    // Mostrar "Conexión" cuando el usuario se conecta
+    var item = document.createElement('li');
+    item.textContent = '¡Te has conectado al chat!';
+    item.classList.add('connection-message');
+    document.getElementById('messages').appendChild(item);
+});
+
+// Manejador de eventos para recibir mensajes del servidor
+socket.on('message', function(data) {
+    var item = document.createElement('li');
+    item.textContent = data.username + ": " + data.message;
+    item.classList.add('message-item');
+    item.style.color = 'white'; // Establecer el color del texto como blanco
+    document.getElementById('messages').appendChild(item);
+});
+
+
+
+    </script>
+</body>
+</html>
